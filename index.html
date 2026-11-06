@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#13271f">
+  <meta name="description" content="Search a 500-entry English-Chinese test sample from the NV Atlas project.">
+  <title>NV Atlas Test Sample | Translation Corpus Explorer</title>
+  <link rel="stylesheet" href="assets/styles.css">
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#entries">Skip to corpus entries</a>
+
+  <header class="site-header">
+    <nav class="topbar shell" aria-label="Primary navigation">
+      <a class="brand" href="./" aria-label="NV Atlas Test Sample home">
+        <span class="brand-mark" aria-hidden="true">NV</span>
+        <span class="brand-copy">
+          <strong>NV Atlas</strong>
+          <span>Test sample</span>
+        </span>
+      </a>
+      <a class="project-link" href="https://nvatlas.tra.cuhk.edu.hk/" target="_blank" rel="noopener noreferrer">
+        Visit the NV Atlas project
+        <svg aria-hidden="true" viewBox="0 0 20 20"><path d="M7 4h9v9h-2V7.41l-9.29 9.3-1.42-1.42 9.3-9.29H7V4Z"/></svg>
+      </a>
+    </nav>
+
+    <div class="hero shell">
+      <div class="hero-copy">
+        <p class="eyebrow">Translation corpus explorer</p>
+        <h1>Find language patterns across 500 aligned entries.</h1>
+        <p class="lede">Search an English-Chinese test sample drawn from the NV Atlas project. Explore complete sentences alongside their nominal and verbal anchors.</p>
+      </div>
+      <div class="hero-note" aria-label="Dataset overview">
+        <span class="hero-note-label">Dataset</span>
+        <strong>A 500-entry classroom sample</strong>
+        <p>Built as a static site with no server-side code and no external data services.</p>
+        <div class="stats">
+          <div class="stat">
+            <strong id="stat-entries">500</strong>
+            <span>entries</span>
+          </div>
+          <div class="stat">
+            <strong>2</strong>
+            <span>languages</span>
+          </div>
+          <div class="stat">
+            <strong>5</strong>
+            <span>fields</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="search-section shell" aria-labelledby="search-heading">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Search the corpus</p>
+          <h2 id="search-heading">What would you like to find?</h2>
+        </div>
+        <p>Search across English, Chinese, nominal terms, verb labels, and entry IDs.</p>
+      </div>
+
+      <div class="search-panel">
+        <div class="search-field">
+          <svg class="search-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/></svg>
+          <label class="sr-only" for="search-input">Search corpus entries</label>
+          <input id="search-input" type="search" placeholder="Try “question”, “巴比伦”, or an entry ID" autocomplete="off" spellcheck="false">
+          <button id="clear-search" class="clear-search" type="button" hidden>Clear</button>
+        </div>
+
+        <div class="search-controls">
+          <div class="quick-searches" aria-label="Suggested searches">
+            <span>Try</span>
+            <button type="button" data-query="question">question</button>
+            <button type="button" data-query="巴比伦">巴比伦</button>
+            <button type="button" data-query="permission">permission</button>
+          </div>
+          <label class="field-select" for="field-filter">
+            <span>Search in</span>
+            <select id="field-filter">
+              <option value="all">All fields</option>
+              <option value="English">English sentences</option>
+              <option value="Chinese">Chinese sentences</option>
+              <option value="English_Nominal">English nominals</option>
+              <option value="Chinese_Verb">Chinese verbs</option>
+              <option value="id">Entry ID</option>
+            </select>
+          </label>
+        </div>
+      </div>
+    </section>
+
+    <section id="entries" class="entries-section shell" aria-labelledby="entries-heading">
+      <div class="results-heading">
+        <div>
+          <p class="eyebrow">Corpus entries</p>
+          <h2 id="entries-heading">Browse the sample</h2>
+        </div>
+        <p id="results-summary" class="results-summary" role="status" aria-live="polite">Loading 500 entries…</p>
+      </div>
+
+      <div id="loading-state" class="state-panel" aria-live="polite">
+        <span class="loading-dot" aria-hidden="true"></span>
+        <p>Loading the corpus data…</p>
+      </div>
+
+      <div id="error-state" class="state-panel state-panel-error" hidden>
+        <h3>The dataset could not be loaded.</h3>
+        <p>Open this site through a local web server or GitHub Pages rather than directly from the file system.</p>
+      </div>
+
+      <div id="empty-state" class="state-panel state-panel-empty" hidden>
+        <span class="empty-mark" aria-hidden="true">0</span>
+        <h3>No matching entries</h3>
+        <p>Try a shorter search term, switch the search field, or clear the current query.</p>
+        <button id="empty-clear" type="button">Clear search</button>
+      </div>
+
+      <div id="entry-list" class="entry-grid" aria-label="Corpus search results"></div>
+
+      <nav id="pagination" class="pagination" aria-label="Results pages" hidden>
+        <button id="prev-page" type="button">Previous</button>
+        <span id="page-status"></span>
+        <button id="next-page" type="button">Next</button>
+      </nav>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <div>
+        <strong>NV Atlas test sample</strong>
+        <p>A classroom corpus explorer created for learning Git, GitHub, and static website publishing.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://nvatlas.tra.cuhk.edu.hk/" target="_blank" rel="noopener noreferrer">NV Atlas project</a>
+        <a href="data/NVAtlas-AI-Agent.csv" download>Source CSV</a>
+      </div>
+    </div>
+  </footer>
+
+  <noscript>
+    <p class="noscript-note">This corpus explorer needs JavaScript enabled to search and display the entries.</p>
+  </noscript>
+</body>
+</html>
